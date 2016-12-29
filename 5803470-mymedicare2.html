@@ -6,13 +6,28 @@
 <body>
 	<div class="buttons" id="ctl00_ChatMainContentPlaceHolder_Panel1">
 		<span class="button-left">
-			<input class="Button" id="ctl00_ChatMainContentPlaceHolder_AcceptButton" name="ctl00$ChatMainContentPlaceHolder$AcceptButton" onclick="setTimeout('PopupBlocked()',1000);return false;" onkeypress="FireButtonClick(event, 'ctl00_ChatMainContentPlaceHolder_AcceptButton')" title="Accept" type="submit" value=" Accept">
+			<input class="Button" id="ctl00_ChatMainContentPlaceHolder_AcceptButton" name="ctl00$ChatMainContentPlaceHolder$AcceptButton" onclick="setTimeout('PopupBlocked()',2000);return false;" onkeypress="FireButtonClick(event, 'ctl00_ChatMainContentPlaceHolder_AcceptButton')" title="Accept" type="submit" value=" Accept">
 		</span>
 	</div>
 	
 	<script type="text/javascript">
     
 	var popupMessage = "The MyMedicare.gov Live Chat site requires pop-up blockers to be disabled in order to function properly.  Please disable your pop-up blocker and click the \"Accept\" button again to continue.";
+	
+	window.onload=function(){ 
+        var PUtest = window.open("blank.htm", "", "width=1000,height=250");
+        if(PUtest)
+        {
+            //alert("Pass");
+			window.focus();
+            window.location = "5803470-mymedicare2-success.html";
+            PUtest.close();
+        }
+        else
+        {
+            alert(popupMessage);
+        }
+    };
 	
 	function PopupBlocked()
     {
@@ -22,7 +37,7 @@
             //alert("Pass");
 			window.focus();
             window.location = "5803470-mymedicare2-success.html";
-            //PUtest.close();
+            PUtest.close();
         }
         else
         {
