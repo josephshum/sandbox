@@ -1,0 +1,479 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html id="ctl00_htmlHead" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head id="ctl00_Top">
+    <script type="text/javascript" src="./javascript/jsapi.js"></script>
+    <script type='text/javascript' src='./javascript/jquery-1.7.2.js'></script>
+    <script type='text/javascript' src='./javascript/fontsizer.jquery.js'></script>
+
+    
+    <link rel="stylesheet" href="CSS/MedicareHeaderFooter.css" type="text/css" /><link rel="stylesheet" href="CSS/MedicareGlobal.css" type="text/css" /><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><title>
+	Live Chat Disclaimer
+</title>    
+
+<script type="text/javascript" language="javascript">
+    var gdlgClose = false;
+     if(typeof window.event != 'undefined')
+        document.onkeydown = function()
+        {
+            var t = event.srcElement.type;
+            var kc = event.keyCode;
+            return ((kc != 8) || (t == 'text' && kc != 13) || (t == 'textarea'))
+        }
+     else
+        document.onkeypress = function(e)
+        {
+            var t = e.target.type;
+            var kc = e.keyCode;
+            if ((kc != 8) || (t == 'text' && kc != 13) || (t == 'textarea'))
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
+        }     
+     
+     //<![CDATA[
+        function mp_onload()
+        {
+          if(window.body_onload != null)
+          window.body_onload();
+        }
+        function getAnchorValue()
+        {
+            var url = location.href;
+            var urlArray = url.split('#');
+
+            //Delete old cookie.
+            document.cookie = "anchor=" + "" + "; expires=-1" + "; path=/";
+            
+            if (urlArray[1] != null && urlArray[1] != "")
+            {
+                //Create new cookie.
+                document.cookie = "anchor=" + urlArray[1] + "; path=/";
+            }
+        }
+        
+    function FontSize_onload()
+    {
+        ///// The folloiwng code si commented as the new Font Sizer is used
+//      if(document.getElementById("ctl00_TextSize").value == "smallFont")
+//      {
+//        changeSmallFont();
+//      }
+//      else if(document.getElementById("ctl00_TextSize").value == "medFont")
+//      {
+//        changeMedFont();
+//      }
+//      else if(document.getElementById("ctl00_TextSize").value == "largeFont")
+//      {
+//        changeLargeFont();
+//      }
+//      else
+//      {
+//        changeSmallFont();
+//      }
+      
+    }
+      
+    function clearSelected() 
+    { 
+        $("a.smallFont").removeClass("currFont"); 
+        $("a.medFont").removeClass("currFont"); 
+        $("a.largeFont").removeClass("currFont"); 
+        $("body").removeClass("smallFont").removeClass("medFont").removeClass("largeFont"); 
+    }
+    function saveState(curSize) 
+    {	
+        var date = new Date(); 
+        date.setTime(date.getTime()+(7*24*60*60*1000)); 
+        var expires = "; expires="+date.toGMTString(); 
+        document.cookie = "fontSizer"+"="+curSize+expires+"; path=/";
+     }
+    function changeSmallFont()
+    { 
+        document.getElementById("ctl00_SmallHyperLink").className ="currFont";
+        document.getElementById("ctl00_LargeHyperLink").className ="largeFont";
+        document.getElementById("ctl00_MedHyperLink").className ="medFont";
+       document.body.className = "smallFont";
+       document.getElementById("ctl00_TextSize").value = "smallFont";
+       
+        if(document.URL.indexOf("ChatPanel") != -1)
+        {
+            window.frames.ChatTranscript.changeTextSize("smallFont samplesBody");
+        }
+        
+        return false;
+    }
+    function changeMedFont()
+    { 
+        document.getElementById("ctl00_MedHyperLink").className ="medFont currFont";
+        document.getElementById("ctl00_LargeHyperLink").className ="largeFont";
+        document.getElementById("ctl00_SmallHyperLink").className ="smallFont";
+        document.body.className = "medFont";
+        document.getElementById("ctl00_TextSize").value = "medFont";
+        
+        if(document.URL.indexOf("ChatPanel") != -1)
+        {
+            window.frames.ChatTranscript.changeTextSize("medFont samplesBody");
+        }
+        
+        return false;
+    }
+    function changeLargeFont()
+    {
+        document.getElementById("ctl00_LargeHyperLink").className ="largeFont currFont";
+        document.getElementById("ctl00_MedHyperLink").className ="medFont";
+        document.getElementById("ctl00_SmallHyperLink").className ="smallFont";
+        document.body.className = "largeFont"; 
+        document.getElementById("ctl00_TextSize").value = "largeFont";
+
+        if(document.URL.indexOf("ChatPanel") != -1)
+        {
+            window.frames.ChatTranscript.changeTextSize("largeFont samplesBody");
+        }
+        return false;
+    }
+    function getCookie(c_name) 
+    { 
+        if (document.cookie.length>0) 
+        {
+             c_start=document.cookie.indexOf(c_name + "="); 
+             if (c_start!=-1) 
+             { 
+                 c_start=c_start + c_name.length+1; 
+                 c_end=document.cookie.indexOf(";",c_start); 
+                 if (c_end==-1) 
+                     c_end=document.cookie.length; 
+                 return unescape(document.cookie.substring(c_start,c_end)); 
+             } 
+         } 
+         return ""; 
+     }
+
+     function chatSave() {
+         var varConfirmMsg = "";
+         varConfirmMsg = 'Save a text file containing the \r\ntranscript of your live chat session';
+         if (confirm(varConfirmMsg) == false) return false;
+     }
+
+     function chatClose() {
+
+         var myclose = confirm('Close window and quit chat session?');
+         if (myclose) {
+             window.close();
+             return true;
+         } 
+     
+     }
+
+     function chatPrint() {
+
+
+         var varConfirmMsg = "";
+         varConfirmMsg = 'Print the transcript of your live \r\nchat session';
+
+         if (!document.getElementById('ctl00_ChatMainContentPlaceHolder_DisabledCheck').checked) {
+             //// Construct the Content
+             var varContent = "";
+             ////varContent += "<HTML><HEAD></HEAD><BODY>";
+             varContent += getChatTranscript();
+             ////varContent += "</BODY></HTML>";
+
+             var winChat = window.open();
+             self.focus();
+             winChat.document.open();
+             winChat.document.write(varContent);
+             winChat.document.body.style.fontWeight = "bold";
+             winChat.document.close();
+             //// Print the contents of the Chat window
+             winChat.focus();
+             winChat.print();
+             winChat.close();
+
+             //// Set the gdlgCLose value to false
+             gdlgClose = false;
+         }
+         else {
+             //// Prompt a message
+             if (confirm(varConfirmMsg) == true) {
+                 //// Construct the Content
+                 var varContent = "";
+                 ////varContent += "<HTML><HEAD></HEAD><BODY>";
+                 varContent += getChatTranscript();
+                 ////varContent += "</BODY></HTML>";
+
+                 var winChat = window.open();
+                 self.focus();
+                 winChat.document.open();
+                 winChat.document.write(varContent);
+                 winChat.document.body.style.fontWeight = "bold";
+                 winChat.document.close();
+                 //// Print the contents of the Chat window
+                 winChat.focus();
+                 winChat.print();
+                 winChat.close();
+
+                 //// Set the gdlgCLose value to false
+                 gdlgClose = false;
+             }
+         }
+         
+         function getChatTranscript() 
+         {
+             var strChatOutput = ""
+             var varChatStartTime = "";
+             var varChatEndTime = "";
+             var mon = new Date().getMonth() + 1;
+             var varToday = mon + "/" + new Date().getDate().toString() + "/" + new Date().getFullYear().toString();
+    
+             if (document.URL.indexOf("ChatPanel") != -1) {
+
+                 varChatStartTime = window.frames.ChatTranscript.document.getElementById("hdChatStartTime").value;
+                 varChatEndTime = window.frames.ChatTranscript.document.getElementById("hdChatEndTime").value;
+
+                 strChatOutput += "<br />";
+                 strChatOutput += "----------------<b>" + 'MyMedicare.gov Live Chat Transcript' + "</b>----------------";
+                 strChatOutput += "<br />";
+                 strChatOutput += 'Live chat Date:' + varToday + "<br />";
+                 strChatOutput += 'Start Time:' + varChatStartTime + "<br />";
+                 strChatOutput += 'End Time:' + varChatEndTime;
+                 strChatOutput += "<br />";
+                 strChatOutput += "---------------------------------------------------------------------------------------------------";
+                 strChatOutput += "<br />";
+          
+                 strChatOutput += "<TABLE>"; 
+                 strChatOutput += window.frames.ChatTranscript.document.getElementById("ChatTranscript").innerHTML;
+                 strChatOutput += "</TABLE>";
+                                 
+                 //// Changing the font size
+                 strChatOutput = strChatOutput.replace(/1.4em/gi,"0.9em");
+                 
+                 ////alert(strChatOutput);
+             }
+             return strChatOutput;
+         }
+         
+
+
+     }
+ 
+</script>
+</head>
+
+<body id="ctl00_chatBody" onload="Javascript:window_onload('Close window and quit chat session?','The MyMedicare.gov Live Chat site requires pop-up blockers to be disabled in order to function properly.  Please disable your pop-up blocker and click the \&quot;Accept\&quot; button again to continue.'); FontSize_onload(); return false;">
+    <div class="SkipNav">
+        <a  href="#maincontent" title='Skip Navigation'>Skip Navigation</a>
+    </div>
+    
+            
+    <a name="Top"></a>
+    <form name="aspnetForm" method="post" action="disclaimer.aspx" id="aspnetForm" autocomplete="off">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTA0NzcxOTI2NA9kFgJmD2QWAgIBD2QWAgIDDxYCHgZvbmxvYWQFowJKYXZhc2NyaXB0OndpbmRvd19vbmxvYWQoJ0Nsb3NlIHdpbmRvdyBhbmQgcXVpdCBjaGF0IHNlc3Npb24/JywnVGhlIE15TWVkaWNhcmUuZ292IExpdmUgQ2hhdCBzaXRlIHJlcXVpcmVzIHBvcC11cCBibG9ja2VycyB0byBiZSBkaXNhYmxlZCBpbiBvcmRlciB0byBmdW5jdGlvbiBwcm9wZXJseS4gIFBsZWFzZSBkaXNhYmxlIHlvdXIgcG9wLXVwIGJsb2NrZXIgYW5kIGNsaWNrIHRoZSBcIkFjY2VwdFwiIGJ1dHRvbiBhZ2FpbiB0byBjb250aW51ZS4nKTsgRm9udFNpemVfb25sb2FkKCk7IHJldHVybiBmYWxzZTsWAgICD2QWBAICD2QWAgIBD2QWBAIBD2QWAmYPDxYCHghJbWFnZVVybAUaLi4vSW1hZ2VzL01lZGljYXJlTG9nby5wbmdkZAIFD2QWAgIBD2QWAgIBDw9kFgIeB29uY2xpY2sFZ3ZhciBteWNsb3NlID0gY29uZmlybSgnQ2xvc2Ugd2luZG93IGFuZCBxdWl0IGNoYXQgc2Vzc2lvbj8nKTsgaWYobXljbG9zZSl7d2luZG93LmNsb3NlKCk7fXJldHVybiBmYWxzZTtkAgMPZBYCAgEPZBYCZg8WAh4FY2xhc3MFCERpc2NsYWltFgICBQ8PFgQeCENzc0NsYXNzBQdidXR0b25zHgRfIVNCAgJkZGR7jmSyEs1RWSpRiRLQJ7kSW9mMMQ==" />
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="ECBAF212" />
+</div>
+    <div  id="OverallMedicareContainer">
+        <div id="page1">
+           <input type="hidden" name="ctl00$ChatAuth" id="ctl00_ChatAuth" />
+           <input type="hidden" name="ctl00$TextSize" id="ctl00_TextSize" value="small" />
+           <header id="header" role="banner">
+            <!-- Header Markup and Navigation links Start-->
+            <nav id="headertoolbar">
+
+  <ul id="headertoolbarleft">
+    <li id="fontli">
+      <ol>
+        <li>
+          <a class="smallFont" href="#" title="Select here to use a small font">
+            A<span class="HiddenText"> Small Font</span>
+          </a>
+        </li>
+        <li>
+          <a class="medFont" href="#" title="Select here to use a medium font">
+            A<span class="HiddenText"> Medium Font</span>
+          </a>
+        </li>
+        <li>
+          <a class="largeFont" href="#" title="Select here to use a large font">
+            A<span class="HiddenText"> Large Font</span>
+          </a>
+        </li>
+      </ol>
+    </li>
+  </ul>
+
+
+  <ul id="headertoolbarright">
+    <li id="closeli">
+      <a href="#" title="Close this window" onclick="javascript: chatClose();" >Close Window</a>
+    </li>
+  </ul>
+
+</nav>
+
+<div id="headerlogocontent">
+  <div id="headerlogo">
+        <a title="Medicare.gov - the Official U.S. Government Site for Medicare" href="http://www.medicare.gov/" id="headerlogo-link">
+            <img alt="Medicare.gov - the Official U.S. Government Site for Medicare" src="./Images/Medicare/logoSprite.png">
+        </a>
+    </div>
+</div>
+
+            <!-- Header Markup and Navigation links End-->
+            </header>
+            <!-- Main Content Start -->
+            <div id="Content-wrap">
+        
+        <div id="ctl00_ContentPanel">
+	
+                <a name="maincontent" tabindex="-1"></a>
+            
+            
+<link rel="Stylesheet" href="CSS/WebChat.css" type="text/css" />        
+    <script type="text/javascript">
+    var confirmCloseWindow = "Close window and quit chat session?"; 
+    var popupMessage = "The MyMedicare.gov Live Chat site requires pop-up blockers to be disabled in order to function properly.  Please disable your pop-up blocker and click the \"Accept\" button again to continue.";
+
+    function FireButtonClick(event, target) {
+        event = (event) ? event : ((window.event) ? window.event : "");
+        if (event.keyCode == 13) {
+            var defaultButton;
+
+            defaultButton = document.getElementById ? document.getElementById(target) : document.all ? document.all[target] : document.layers[target];
+
+            if (defaultButton && typeof (defaultButton.click) != "undefined") {
+                defaultButton.click();
+            }
+        }
+    }
+
+    function setMessages(confirmClose, popup)
+    {
+        confirmCloseWindow = confirmClose;
+        popupMessage = popup;
+    }
+    
+    window.onbeforeunload = function(e){
+        var message = confirmCloseWindow, e = e || window.event;
+        if(e.clientX < 0 || e.clientY < 0)
+        {
+            e.returnValue = message;
+        }
+    };
+    
+    function window_onload(closeMsg, popup)
+    {
+	    setMessages(closeMsg,popup);
+    }
+    
+    function PopupBlocked()
+    {
+        var PUtest = window.open("blank.htm", "", "width=1,height=1");
+        if(PUtest)
+        {
+            window.focus();
+            window.location = "5803470-mymedicare2-success.html";
+			//window.location = "ChatPanel.aspx?Size=" + document.getElementById('ctl00_TextSize').value;
+            PUtest.close();
+        }
+        else
+        {
+            alert(popupMessage);
+        }
+        
+    }
+    </script>
+    
+    <div id="ctl00_ChatMainContentPlaceHolder_DisclaimMain" class="Disclaim">
+        
+        <div id="ctl00_ChatMainContentPlaceHolder_pnlPrint" class="verticalSpacing DescriptionStyle">
+		     
+            <div id="ctl00_ChatMainContentPlaceHolder_PrintLinkPanel" style="padding-bottom:10px">
+			 
+                <h1>
+                    <span id="ctl00_ChatMainContentPlaceHolder_lblHeader" class="HeaderStyle">Live Chat</span>
+                </h1>
+            
+		</div>
+        
+	</div>
+
+
+
+        <div id="ctl00_ChatMainContentPlaceHolder_pnlDisclaimerText" class="DisclaimerPanel">
+		
+	        You are accessing a U.S. Government information system, which includes: (1) this computer, (2) this computer network, (3) all computers connected to this network, and (4) all devices and storage media attached to this network or to a computer on this network. This information system is provided for U.S. Government-authorized use only.  Unauthorized or improper use of this system may result in disciplinary action, as well as civil and criminal penalties. By using this information system, you understand and consent to the following:<div class="horizontalSpacingLeft20"><ul><li class="ListhorizontalSpacingLeft">You have no reasonable expectation of privacy regarding any communication or data transiting or stored on this information system. At any time, and for any lawful Government purpose, the Government may monitor, intercept, and search and seize any communication or data transiting or stored on this information system.</li><li class="ListhorizontalSpacingLeft">Any communication or data transiting or stored on this information system may be disclosed or used for any lawful Government purpose</li></ul></div>
+		    
+	        
+	</div>
+
+	      <div id="ctl00_ChatMainContentPlaceHolder_Panel1" class="buttons">
+		  
+            <span class="button-left">
+            <input type="submit" name="ctl00$ChatMainContentPlaceHolder$AcceptButton" value="    Accept" onclick="setTimeout('PopupBlocked()',1000);return false;" id="ctl00_ChatMainContentPlaceHolder_AcceptButton" title="Accept" class="Button" onkeypress="FireButtonClick(event, 'ctl00_ChatMainContentPlaceHolder_AcceptButton')" />
+            </span>
+            <span class="button-left">
+            <input type="submit" name="ctl00$ChatMainContentPlaceHolder$CancelButton" value="   Cancel" onclick="self.close();" id="ctl00_ChatMainContentPlaceHolder_CancelButton" title="Cancel" class="Button" onkeypress="FireButtonClick(event, 'ctl00_ChatMainContentPlaceHolder_CancelButton')" />
+                </span>
+	    
+	</div>
+    </div>
+
+            
+       
+</div>
+         
+        <div id="ctl00_footer">
+	
+        <div class="WebChat-Footer-background">
+		
+            <img id="ctl00_CMSLogo" src="Images/chat_btm_logo.png" alt="CMS.gov - Centers for Medicare &amp; Medicaid Services" style="border-width:0px;" />
+        
+	</div>
+        
+</div>
+       </div>
+            <!-- Main Content End -->
+            <!-- footer Scripts Start -->
+            <footer id="footer" role="contentinfo">
+                <!--Font Resize Script-->
+                <script type='text/javascript'>
+                    $(document).ready(function () {
+                        fontResizer();
+                    });
+                </script>
+               <!-- Scripts to address skipnav issue for Chrome -->  
+                <script type='text/javascript'>    $('a#skipNavigation').bind('keydown', function (event) {
+                        //remove deafult href if set
+                        $(this).attr("href", "javascript:void(0);");
+                        //use page h1 as target or set rel attribute to set up custom area of focus
+                        //for custom, set rel to ".classname" or "#idname"
+                        var elemet = ($(this).attr("rel")) ? $(this).attr("rel") : "h1";
+                        //if no custom element is et get position of h1
+                        var pos = (element) ? $(element).offset() : $("h1").offset();
+                        //detect if enter key is pressed
+                        if (event.keyCode === 13) {
+                            $(element).attr("tabindex", "-1");  //set nagative index on scroll target
+                            $(document).scrollTop(pos.top);  //scroll to top of target
+                            $(element).focus(); //set visual focus to tagret
+                            event.preventDefault(); //prevent default Enter key functionality for page
+                        }
+                    });
+                </script>
+
+            </footer>   
+            <!-- footer Scripts End -->
+         </div>
+    </div>
+    </form>
+</body>
+    
+</html>

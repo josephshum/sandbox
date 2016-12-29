@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Popup Test</title>
+</head>
+<body>
+	<div class="buttons" id="ctl00_ChatMainContentPlaceHolder_Panel1">
+		<span class="button-left">
+			<input class="Button" id="ctl00_ChatMainContentPlaceHolder_AcceptButton" name="ctl00$ChatMainContentPlaceHolder$AcceptButton" onclick="setTimeout('PopupBlocked()',1000);return false;" onkeypress="FireButtonClick(event, 'ctl00_ChatMainContentPlaceHolder_AcceptButton')" title="Accept" type="submit" value=" Accept">
+		</span>
+	</div>
+	
+	<script type="text/javascript">
+    
+	var popupMessage = "The MyMedicare.gov Live Chat site requires pop-up blockers to be disabled in order to function properly.  Please disable your pop-up blocker and click the \"Accept\" button again to continue.";
+	
+	function PopupBlocked()
+    {
+        var PUtest = window.open("https://chat.mymedicare.gov/chatclient/blank.htm", "", "width=1000,height=250");
+        if(PUtest)
+        {
+            //alert("Pass");
+			window.focus();
+            window.location = "5803470-mymedicare2-success.html";
+            PUtest.close();
+        }
+        else
+        {
+            alert(popupMessage);
+        }
+        
+    }
+    </script>
+</body>
+</html>
